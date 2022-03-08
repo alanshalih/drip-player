@@ -13,15 +13,18 @@ import { onMount } from "svelte";
   export let config = {};
 
   config.events =  { 
-      'onStateChange': onPlayerStateChange
+      'onStateChange': onPlayerStateChange,
+      'onReady': onPlayerReady,
     }
 
     let playButton = true;
+    let ready = false;
     let toolbar = false;
     let PlayerWidth  = config.width;
     let PlayerHeight = config.height;
     let isFullscreen = false;
     let rotate = false;
+
 
     onMount(()=>{
     const offsetWidth = document.querySelector('#check-width').offsetWidth
@@ -29,7 +32,12 @@ import { onMount } from "svelte";
     config.height = Math.floor(offsetWidth / 16 * 9)
       PlayerWidth  = config.width;
       PlayerHeight = config.height;
+  
   })
+
+  function onPlayerReady(){
+    ready = true;
+  }
 
     function onPlayerStateChange(event){
       if (event.data == YT.PlayerState.PLAYING || event.data == YT.PlayerState.BUFFERING) {
@@ -58,6 +66,7 @@ import { onMount } from "svelte";
     player = new YT.Player(randomId, config);
 
     setInterval(()=>{
+      
       if(!playButton)
       {
         // console.log(player.getCurrentTime())
@@ -121,9 +130,12 @@ import { onMount } from "svelte";
 
       isFullscreen = true;
       PlayerWidth = window.screen.width;
-    PlayerHeight = window.screen.height
-;
- 
+    PlayerHeight = window.screen.height;
+      
+      if(mobileAndTabletCheck())
+      {
+        PlayerHeight = window.screen.height - 9;
+      }
    
     } 
     player.setSize(PlayerWidth,PlayerHeight)
@@ -150,7 +162,7 @@ import { onMount } from "svelte";
 <div id="check-width" class="relative  {isFullscreen ? '' : 'container mx-auto'}   bg-red-400  {rotate ? '  ' : ''}"  >
   <div class=" absolute " id="{randomId}"></div>
   <div class="absolute z-10 "  on:mousemove="{()=>{toolbar = true;triggerTime = 3000}}"  on:mouseleave="{()=>{toolbar = false;}}" style="width : {PlayerWidth}px; height : {PlayerHeight}px">
-    <div class="flex justify-center  "   on:click="{playOrPause}" style="height: {Math.floor(PlayerHeight)-20}px;linear-gradient(red, yellow, green);{playButton ? 'background-image: linear-gradient(black,black, rgba(255,0,0,0),rgba(255,0,0,0),rgba(255,0,0,0),rgba(255,0,0,0), black, black)' : ''};
+    <div class="flex justify-center  "   on:click="{playOrPause}" style="height: {Math.floor(PlayerHeight)-20}px;{playButton && ready ? 'background: linear-gradient(black,black, rgba(0,0,0,0),rgba(0,0,0,0),rgba(0,0,0,0),rgba(0,0,0,0), black, black)' : ''};
 ">
       {#if playButton}
          <!-- content here -->
