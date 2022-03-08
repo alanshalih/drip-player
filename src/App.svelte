@@ -67,6 +67,18 @@ import { onMount } from "svelte";
       }
     },1000)
     
+
+    document.addEventListener('fullscreenchange', (event)=>{
+      if (!document.fullscreenElement && !document.webkitIsFullScreen && !document.mozFullScreen && !document.msFullscreenElement) {
+        ///fire your event
+        isFullscreen = false;
+      PlayerWidth = config.width;
+    PlayerHeight = config.height;
+    document.exitFullscreen();
+    player.setSize(PlayerWidth,PlayerHeight)
+    }
+    });
+
  
 
    
