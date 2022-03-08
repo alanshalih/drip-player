@@ -132,9 +132,9 @@ import { onMount } from "svelte";
       PlayerWidth = window.screen.width;
       PlayerHeight = window.screen.height;
       
-      if(mobileAndTabletCheck())
+      if(mobileAndTabletCheck() && PlayerHeight > PlayerWidth)
       {
-        PlayerHeight = window.screen.height - 10;
+        PlayerHeight = window.screen.height - 20;
       }
    
     } 
