@@ -162,7 +162,7 @@ import { onMount } from "svelte";
 <div id="check-width" class="relative  {isFullscreen ? '' : 'container mx-auto'}   bg-red-400  {rotate ? '  ' : ''}"  >
   <div class=" absolute " id="{randomId}"></div>
   <div class="absolute z-10 "  on:mousemove="{()=>{toolbar = true;triggerTime = 3000}}"  on:mouseleave="{()=>{toolbar = false;}}" style="width : {PlayerWidth}px; height : {PlayerHeight}px">
-    <div class="flex justify-center  "   on:click="{playOrPause}" style="height: {Math.floor(PlayerHeight)-20}px;{playButton && ready ? 'background: linear-gradient(black,black, rgba(0,0,0,0),rgba(0,0,0,0),rgba(0,0,0,0),rgba(0,0,0,0), black, black)' : ''};
+    <div class="flex justify-center  "   on:click="{playOrPause}" style="height: {Math.floor(PlayerHeight)}px;{playButton && ready ? 'background: linear-gradient(black,black, rgba(0,0,0,0),rgba(0,0,0,0),rgba(0,0,0,0),rgba(0,0,0,0), black, black)' : ''};
 ">
       {#if playButton}
          <!-- content here -->
