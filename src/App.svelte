@@ -130,11 +130,11 @@ import { onMount } from "svelte";
 
       isFullscreen = true;
       PlayerWidth = window.screen.width;
-    PlayerHeight = window.screen.height;
+      PlayerHeight = window.screen.height;
       
       if(mobileAndTabletCheck())
       {
-        PlayerHeight = window.screen.height - 9;
+        PlayerHeight = window.screen.height - 10;
       }
    
     } 
