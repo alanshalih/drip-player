@@ -32,6 +32,17 @@ import { onMount } from "svelte";
     config.height = Math.floor(offsetWidth / 16 * 9)
       PlayerWidth  = config.width;
       PlayerHeight = config.height;
+
+      window.addEventListener("orientationchange", function() {
+        console.log('change')
+        const offsetWidth = document.querySelector('#check-width').offsetWidth
+    config.width = offsetWidth;
+    config.height = Math.floor(offsetWidth / 16 * 9)
+      PlayerWidth  = config.width;
+      PlayerHeight = config.height;
+      player.setSize(PlayerWidth,PlayerHeight)
+      
+}, false);
   
   })
 
